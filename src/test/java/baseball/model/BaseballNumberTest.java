@@ -2,9 +2,11 @@ package baseball.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BaseballNumberTest {
 
@@ -28,5 +30,14 @@ public class BaseballNumberTest {
         // then
         assertNotNull(baseballNumber);
         assertEquals(baseballNumber.getNumber(), number);
+    }
+
+    @DisplayName("BaseballNumber 생성 실패 테스트 - 범위 오류")
+    @ParameterizedTest
+    @ValueSource(ints = {10, -1, 20, -5, 0})
+    void createExceptionTest(int invalidNumber) {
+        // when & then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> BaseballNumber.createBaseballNumber(invalidNumber, 0));
     }
 }
