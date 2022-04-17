@@ -12,21 +12,43 @@ public class BaseballNumber {
     private static final NumberProvider DEFAULT_PROVIDER = new NextStepNumberProvider();
 
     private final int number;
+    private final int index;
 
-    private BaseballNumber(int number) {
+    private BaseballNumber(int number, int index) {
+
         this.number = number;
+        this.index = index;
     }
 
-    public static BaseballNumber createBaseballNumberWithProvider(NumberProvider provider) {
-         return new BaseballNumber(provider.getRandomNumberInRange(START_RANGE, END_RANGE));
+    public static BaseballNumber createBaseballNumberWithProvider(NumberProvider provider, int index) {
+         return new BaseballNumber(provider.getRandomNumberInRange(START_RANGE, END_RANGE), index);
     }
 
-    public static BaseballNumber creatBaseballNumber() {
-        return new BaseballNumber(DEFAULT_PROVIDER.getRandomNumberInRange(START_RANGE, END_RANGE));
+    public static BaseballNumber creatBaseballNumber(int index) {
+        return new BaseballNumber(DEFAULT_PROVIDER.getRandomNumberInRange(START_RANGE, END_RANGE), index);
+    }
+
+    public static BaseballNumber createBaseballNumber(int number, int index) {
+        validateRange(number);
+        return new BaseballNumber(number, index);
+    }
+
+    private static void validateRange(int number) {
+        if(number < START_RANGE) {
+            throw new IllegalArgumentException("Number must be greater than " + START_RANGE);
+        }
+
+        if(number > END_RANGE) {
+            throw new IllegalArgumentException("Number must be less than " + END_RANGE);
+        }
     }
 
     public int getNumber() {
         return number;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     @Override
