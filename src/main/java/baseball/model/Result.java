@@ -19,4 +19,8 @@ public class Result implements Iterable<Status> {
     public Iterator<Status> iterator() {
         return statuses.iterator();
     }
+
+    public boolean isDone() {
+        return !statuses.contains(Status.NOTHING) && !statuses.contains(Status.BALL);
+    }
 }

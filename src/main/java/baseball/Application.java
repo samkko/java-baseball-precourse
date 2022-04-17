@@ -18,5 +18,11 @@ public class Application {
         String userInput = viewController.getUserInput();
         Result result = gameController.play(BaseballNumbers.createBaseballNumbers(userInput));
         viewController.printMessageWithNewLine(BaseballMessageConverter.resultToOutput(result));
+
+        while(!result.isDone()) {
+            userInput = viewController.getUserInput();
+            result = gameController.play(BaseballNumbers.createBaseballNumbers(userInput));
+            viewController.printMessageWithNewLine(BaseballMessageConverter.resultToOutput(result));
+        }
     }
 }
