@@ -11,7 +11,7 @@ import java.util.List;
 public class GameController {
 
     private final static int BASEBALL_NUMBER_SIZE = 3;
-    private final BaseballNumbers baseballNumbers;
+    private BaseballNumbers baseballNumbers;
 
     public GameController() {
         this.baseballNumbers = BaseballNumbers.createBaseballNumbers(BASEBALL_NUMBER_SIZE);
@@ -20,6 +20,10 @@ public class GameController {
     public Result play(BaseballNumbers baseballNumbers) {
 
         return new Result(checkNumbers(baseballNumbers));
+    }
+
+    public void init() {
+        this.baseballNumbers = BaseballNumbers.createBaseballNumbers(BASEBALL_NUMBER_SIZE);
     }
 
     private List<Status> checkNumbers(BaseballNumbers input) {

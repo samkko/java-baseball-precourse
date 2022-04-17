@@ -12,17 +12,38 @@ public class Application {
 
     private static final ViewController viewController = new ViewController(new NextStepInputView(), new ConsoleOutputView());
     private static final GameController gameController = new GameController();
+    private static final String CONTINUE_SIGN = "1";
+    private static final String END_SIGN = "2";
 
     public static void main(String[] args) {
 
-        String userInput = viewController.getUserInput();
-        Result result = gameController.play(BaseballNumbers.createBaseballNumbers(userInput));
+        while(playGame().equals(CONTINUE_SIGN)) {
+            gameController.init();
+        }
+    }
+
+    private static String playGame() {
+
+        Result result = gameController.play(BaseballNumbers.createBaseballNumbers(viewController.getUserInput()));
         viewController.printMessageWithNewLine(BaseballMessageConverter.resultToOutput(result));
 
         while(!result.isDone()) {
-            userInput = viewController.getUserInput();
-            result = gameController.play(BaseballNumbers.createBaseballNumbers(userInput));
+            result = gameController.play(BaseballNumbers.createBaseballNumbers(viewController.getUserInput()));
             viewController.printMessageWithNewLine(BaseballMessageConverter.resultToOutput(result));
         }
+
+        String continueIntent = viewController.getContinueIntent();
+
+        validateContinueIntent(continueIntent);
+
+        return continueIntent;
+    }
+
+    private static void validateContinueIntent(String continueIntent) {
+        if(continueIntent.equals(CONTINUE_SIGN) || continueIntent.equals(END_SIGN)) {
+            return;
+        }
+
+        throw new IllegalArgumentException("Invalid Sign.");
     }
 }
