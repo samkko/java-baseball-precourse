@@ -42,7 +42,7 @@ public class BaseballNumbers implements Iterable<BaseballNumber> {
     }
 
     private static void createUniqueNumber(BaseballNumbers baseballNumbers, int index) {
-        while(!baseballNumbers.numbers.add(BaseballNumber.creatBaseballNumber(index)));
+        while(!baseballNumbers.numbers.add(BaseballNumber.createBaseballNumber(index)));
     }
 
     private static void validateInput(String input) {

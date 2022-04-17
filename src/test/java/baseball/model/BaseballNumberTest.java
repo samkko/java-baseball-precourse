@@ -12,7 +12,7 @@ public class BaseballNumberTest {
     @Test
     void create() {
         // given & when
-        BaseballNumber baseballNumber = BaseballNumber.creatBaseballNumber(1);
+        BaseballNumber baseballNumber = BaseballNumber.createBaseballNumber(1);
 
         // then
         assertNotNull(baseballNumber);

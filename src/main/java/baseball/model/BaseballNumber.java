@@ -24,7 +24,7 @@ public class BaseballNumber {
          return new BaseballNumber(provider.getRandomNumberInRange(START_RANGE, END_RANGE), index);
     }
 
-    public static BaseballNumber creatBaseballNumber(int index) {
+    public static BaseballNumber createBaseballNumber(int index) {
         return new BaseballNumber(DEFAULT_PROVIDER.getRandomNumberInRange(START_RANGE, END_RANGE), index);
     }
 
